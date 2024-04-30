@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio</title>
+</head>
+<body>
+    <h2>Portfolio</h2>
+    <ul>
+        <li><a href="{% url 'polls:add_stock' %}">Add Stock</a></li>
+        <li><a href="{% url 'polls:sell_stock' %}">Sell Stock</a></li>
+        <li>
+            <!-- Form for entering the stock ID -->
+            <form action="{% url 'polls:update_stock' %}" method="GET">
+                <label for="stock_id">Enter Stock ID:</label>
+                <input type="number" id="stock_id" name="stock_id" required>
+                <button type="submit">Update Stock</button>
+            </form>
+        </li>
+        <li><a href="{% url 'polls:stock_report' %}">Generate Stock Report</a></li>
+    </ul>
+
+    <!-- Table to display all stock entries -->
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Symbol</th>
+                <th>Company Name</th>
+                <th>Stock Type</th>
+                <th>Quantity</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for stock in stocks %}
+            <tr>
+                <td>{{ stock.symbol }}</td>
+                <td>{{ stock.company_name }}</td>
+                <td>{{ stock.stock_type }}</td>
+                <td>{{ stock.quantity }}</td>
+                <td>{{ stock.price }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

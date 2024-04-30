@@ -1,0 +1,31 @@
+<!-- Update Stock Template -->
+{% extends "base.html" %}
+
+{% block content %}
+  <h2>Update Stock</h2>
+  <form method="post">
+    {% csrf_token %}
+    <input type="hidden" name="stock_id" value="{{ stock.id }}">
+    <label for="symbol">Symbol:</label>
+    <input type="text" id="symbol" name="symbol" value="{{ stock.symbol }}" required><br><br>
+
+    <label for="company_name">Company Name:</label>
+    <input type="text" id="company_name" name="company_name" value="{{ stock.company_name }}" required><br><br>
+
+    <label for="stock_type">Stock Type:</label>
+    <select id="stock_type" name="stock_type" value="{{ stock.stock_type }}">
+      <option value="dividend" {% if stock.stock_type == 'dividend' %}selected{% endif %}>Dividend</option>
+      <option value="growth" {% if stock.stock_type == 'growth' %}selected{% endif %}>Growth</option>
+      <option value="value" {% if stock.stock_type == 'value' %}selected{% endif %}>Value</option>
+      <option value="other" {% if stock.stock_type == 'other' %}selected{% endif %}>Other</option>
+    </select><br><br>
+
+    <label for="quantity">Quantity:</label>
+    <input type="number" id="quantity" name="quantity" value="{{ stock.quantity }}" required><br><br>
+
+    <label for="price">Price:</label>
+    <input type="text" id="price" name="price" value="{{ stock.price }}" required><br><br>
+
+    <input type="submit" value="Update Stock">
+  </form>
+{% endblock %}
